@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Sway (NVIDIA)
+Comment=An i3-compatible Wayland compositor (with --unsupported-gpu for NVIDIA)
+Exec=sway --unsupported-gpu
+Type=Application
+DesktopNames=sway;wlroots

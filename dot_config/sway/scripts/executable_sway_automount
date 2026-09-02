@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+mount_disk() {
+    local label="$1"
+ 
+    if udisksctl mount -b $label; then
+        notify-send -u low -h string:x-dunst-stack-tag:automount "Mounted $label"
+    else
+        notify-send -u crit -h string:x-dunst-stack-tag:automount "Failed to mount <$label>"
+    fi
+}
+
+sleep 1;
+
+# mount_disk "/dev/disk/by-label/funy"
+# mount_disk "/dev/disk/by-label/linux-media"
+mount_disk "/dev/disk/by-partlabel/linux-home"
+
+
+if mount | rg "emergency" >/dev/null ; then
+    notify-send -u crit -h string:x-dunst-stack-tag:automount "Issue when mounted disk"
+fi
+
+if systemctl is-active emergency.target >/dev/null 2>&1 ; then
+    notify-send -u crit -h string:x-dunst-stack-tag:automount "System in emergency mode"
+fi
+
+exit 0

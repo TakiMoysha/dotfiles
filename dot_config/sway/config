@@ -1,0 +1,374 @@
+## ==================================== Helper:Docs
+# class/role/title are x11 properties. xwayland apps still have them, but wayland apps do not. 
+# https://github.com/swaywm/sway/wiki
+# https://github.com/jjquin/swayarch/blob/master/.config/sway/config.d/window_rules
+# https://github.com/Crandel/home/blob/master/.config/sway/config#L394 
+# https://gist.github.com/dshoreman/278091a17c08e30c46c7e7988b7c2f7d
+# 
+
+## ==================================== HELPER:UTILS
+# xdotool -- for x11
+# swaymsg -t get_tree -- for sway
+# wayscriber -- for draw-overlay
+
+## ==================================== HELPER:CODES
+# keycode 67 = XF86Launch1
+# keycode 68 = XF86Launch2
+# keycode 69 = XF86Launch3
+# keycode 70 = XF86Launch4
+# keycode 71 = XF86Launch5
+# keycode 72 = XF86Launch6
+# keycode 73 = XF86Launch7
+# keycode 74 = XF86Launch8
+# keycode 75 = XF86Launch9
+#
+# keycode 192 = F1
+# keycode 193 = F2
+# keycode 194 = F3
+# keycode 195 = F4
+# keycode 196 = F5
+# keycode 197 = F6
+# keycode 198 = F7
+# keycode 199 = F8
+# keycode 200 = F9
+
+
+## ==================================== PREINTALL
+# include $HOME/.config/sway/config.d/*
+include $HOME/.config/sway/themes/catppuccin-mocha
+
+exec $scripts/sway_automount
+exec $scripts/sway_session_vars
+
+## ==================================== CONFIG
+set $mod Mod4
+set $ALT Mod1
+
+set $workdir ~/.config/sway
+set $scripts ~/.config/sway/scripts
+
+set $term alacritty
+# set $term kitty
+set $send-notify exec --no-startup-id notify-send -u low -h string:x-dunst-stack-tag:sway
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+# font pango:DejaVu SansMono 8
+
+# hide cursor / 
+seat seat0 hide_cursor 3000
+# seat seat0 hide_cursor when-typing enable # issue: bug in 3d apps (pascube + mouse movement + D)
+
+bindsym $mod+h              focus left
+bindsym $mod+j              focus down
+bindsym $mod+k              focus up
+bindsym $mod+l              focus right
+
+bindsym $mod+Left           focus left
+bindsym $mod+Down           focus down
+bindsym $mod+Up             focus up
+bindsym $mod+Right          focus right
+
+bindsym $mod+Shift+h        move left
+bindsym $mod+Shift+j        move down
+bindsym $mod+Shift+k        move up
+bindsym $mod+Shift+l        move right
+
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+Right    move right
+
+## ========================== REVIEW
+bindsym $mod+Shift+e        split toggle 
+
+bindsym $mod+f              fullscreen toggle
+# bindsym $mod+c split h, $send-notify 'Horizontal Focus'
+# bindsym $mod+v split v, $send-notify 'Vertical Focus'
+## ========================== END
+
+## ========================== REVIEW
+bindsym $mod+e              layout toggle split
+bindsym $mod+Shift+u        layout toggle, $send-notify "Layout: Toggle"
+
+bindsym $mod+w              layout tabbed, $send-notify "Layout: Tabbed"
+bindsym $mod+s              layout stacking, $send-notify "Layout: Stacking"
+## ========================== END
+
+bindsym $mod+Shift+space    floating toggle
+
+bindsym $mod+space          focus mode_toggle
+
+bindsym $mod+Shift+p        focus parent
+bindsym $mod+p              focus child
+
+bindsym $mod+Shift+s        sticky toggle
+
+# hide/show
+bindsym $mod+minus          move scratchpad
+bindsym $mod+equal          scratchpad show
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# bindsym $mod+Shift+q kill
+bindcode $mod+Shift+24 kill
+bindsym $mod+Return     exec --no-startup-id $term
+
+# Noctalia IPC
+set $ipc noctalia msg
+bindsym $mod+d exec $ipc panel-toggle launcher
+bindsym $mod+comma exec $ipc settings-toggle
+
+bindsym Print           exec $ipc screenshot-region
+bindsym $mod+Print      exec $ipc screenshot-fullscreen
+
+bindsym $ALT+F2         exec --no-startup-id nemo
+bindsym $ALT+F3         exec --no-startup-id $scripts/neovide
+
+bindsym --locked XF86MonBrightnessUp exec $ipc brightness-up
+bindsym --locked XF86MonBrightnessDown exec $ipc brightness-down
+# bindsym XF86KbdBrightnessUp     exec light -A 5 -s sysfs/leds/smc::kbd_backlight
+# bindsym XF86KbdBrightnessDown   exec light -U 5 -s sysfs/leds/smc::kbd_backlight
+bindsym --locked XF86AudioRaiseVolume exec $ipc volume-up
+bindsym --locked XF86AudioLowerVolume exec $ipc volume-down
+bindsym --locked XF86AudioMute exec $ipc volume-mute
+
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+# switch to next/previous workspace
+bindsym $mod+z workspace prev_on_output
+bindsym $mod+x workspace next_on_output
+# bindsym $mod+Shift+. workspace next
+# bindsym $mod+Shift+. workspace prev
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+bindsym $mod+Shift+r reload, $send-notify 'Reload'
+# bindsym $mod+... exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Exit sway' 'swaymsg exit' --button-margin-right=10px
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym h resize shrink width 14 px or 14 ppt
+    bindsym j resize grow height 14 px or 14 ppt
+    bindsym k resize shrink height 14 px or 14 ppt
+    bindsym l resize grow width 14 px or 14 ppt
+
+    bindsym Shift+h resize shrink width 6 px or 6 ppt
+    bindsym Shift+j resize grow height 6 px or 6 ppt
+    bindsym Shift+k resize shrink height 6 px or 6 ppt
+    bindsym Shift+l resize grow width 6 px or 6 ppt
+
+    bindsym s resize shrink width 10 px or 10 ppt, resize shrink height 10 px or 10 ppt
+    bindsym b resize grow width 10 px or 10 ppt, resize grow height 10 px or 10 ppt
+
+    bindsym Shift+s resize set height 400 px, resize set width 600 px
+
+    bindsym Shift+1 move position 4 ppt 2 ppt
+    bindsym Shift+2 move position 60 ppt 2 ppt
+    bindsym Shift+3 move position 4 ppt 60 ppt
+    bindsym Shift+4 move position 60 ppt 60 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+set $os_suspend systemctl sleep
+
+set $mode_system (s)uspend, (e)xit, (r)eboot, (Shift+s)hutdown
+bindsym $mod+0 mode "$mode_system"
+mode "$mode_system" {
+    bindsym s exec --no-startup-id $os_suspend, mode "default"
+    bindsym e exec --no-startup-id sway exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# gaps inner 1
+gaps inner 0
+# gaps outer 2
+gaps outer 0
+smart_gaps on
+default_border pixel 4
+# hide_edge_borders --i3 smart
+
+# Set the background image
+# output * bg /home/takimoysha/.config/sway/assets/wallpaper fill
+focus_wrapping no
+
+input type:keyboard {
+    xkb_layout "us,ru"
+    xkb_options "grp:alt_shift_toggle"
+    xkb_numlock enable
+}
+
+
+
+title_align center
+
+# * [!] shadows enable - not working
+set $float border pixel 3, floating enable
+set $big_right_side resize set 890 890, move position 980 135 
+
+for_window [class="XnViewMP"] $float
+for_window [app_id="XnView"] $float
+# for_window [app_id="XnView"] $float
+for_window [app_id="zenity"] $float, border none
+for_window [class=".*"] title_format "%title"
+for_window [class="size-sm"] resize set 400 500
+for_window [class="float"] $float
+for_window [app_id="float"] $float
+
+for_window [app_id="vivaldi-stable" title="^Vivaldi Settings:*"] $float
+for_window [app_id="vivaldi-stable" title="Save File"] $float
+for_window [app_id="vivaldi-stable" title="^Developer Tools*"] $float, $big_right_side
+for_window [app_id="selectdefaultapplication"] $float
+
+for_window [app_id="Rockstar Games Launcher"] $float
+for_window [app_id="nvchad"] $float, $big_right_side
+for_window [app_id="localsend"] $float
+for_window [app_id="org.gnome.gThumb"] $float
+for_window [class="Godot"] $float
+
+for_window {
+    # [app_id="pot"] $float, resize set 600 800
+    # [app_id="pot" title="Translate"] $float, resize set 400 600, move position 1500 10
+    [app_id="org.qbittorrent.qBittorrent"] $float
+    [app_id="albert" title="Settings — Albert"] $float, resize set 1000 600
+    [app_id="floating"] $float, resize set 1000 600
+    [app_id="flameshot"] $float
+    [app_id="qt5ct"] $float, sticky enable, border normal
+    [app_id="qt6ct"] $float, sticky enable, border normal
+    [app_id="xfce-polkit"] $float, sticky enable
+    [app_id="blueman-manager"] $float
+    [app_id="(?i)nemo"] $float
+    [app_id="(?i)thunar"] $float
+    [app_id="thunar" title="^Copying.*|^Confirm.*|^File.*|^Create.*|^Select.*"] $float
+    [app_id="pavucontrol"] $float
+	[app_id="nm-connection-editor$"] $float
+	[app_id="firetools"] $float
+	[app_id="(pavucontrol|psensor)"] $float
+	[app_id="Meld"] $float, resize set 800 600
+	[app_id="io.missioncenter.MissionCenter"] $float, resize set 800 600
+	[app_id="sublime_merge"] $float
+	[app_id="zoom"] $float
+	[app_id="kvantumpreview"] $float
+	[app_id="kvantummanager"] $float
+    [title="^Picture-in-Picture$"] $float, move position 1400 700, resize set 367 207 px, sticky enable
+    [title="^Picture in Picture$"] $float, move position 1400 700, resize set 367 207 px, sticky enable
+    [title="^Picture in picture$"] $float, move position 1400 700, resize set 367 207 px, sticky enable
+    [title="^Library$"] $float, sticky enable
+    [title="Peek preview"] $float
+
+	[app_id="xfce4-appearance-settings"] $float
+	[app_id="xfce4-settings-manager"] $float
+	[app_id="^xfce4-*"] $float
+
+	[app_id="(?i)mpv"] $float
+    [app_id="peazip"] $float
+    [app_id="xarchiver"] $float
+
+    [app_id="vesktop"] $float, move position 840 240, resize set 1080 740 px
+    [app_id="telegram"] $float, move position 900 160, resize set 870 830 px
+    [app_id="rquickshare"] $float, move position 900 160, resize set 870 830 px
+
+    [app_id="com.github.hluk.copyq"] $float, resize set 800 400, move position 1040 80
+}
+
+for_window {
+	[app_id="vlc"] $float, resize set 800 500, move position 1100 500
+	[instance="vlc"] $float, resize set 800 500, move position 1100 500
+}
+
+for_window {
+    [instance="VirtualBox Machine"] $float, resize set 800 600
+    [instance="VirtualBox Manager"] $float, resize set 800 600
+    # [instance="VirtualBox Machine|VirtualBox Manager"] $float, resize set 800 600
+    [instance="VirtualBox"] $float
+    [instance="anydesk"] $float
+    [instance="gpartedbin"] $float 
+    [instance="megasync"] $float, move position mouse
+    [instance="update_installer"] $float
+    [instance="lxappearance"] $float
+
+    # [instance="steamwebhelper"] $float
+    [class="steam"] $float
+}
+
+for_window {
+	[window_role="GtkFileChooserDialog"] resize set 800 600
+	[window_role="GtkFiileChooserDialog"] move position center
+    [window_role="pop-up"] $float
+    [window_role="bubble"] $float
+    [window_role="task_dialog"] $float
+    [window_role="Preferences"] $float
+
+    [window_role="dialog"] $float
+    [window_type="dialog"] $float
+    [window_role="menu"] $float
+    [window_type="menu"] $float
+}
+
+for_window {
+    [title="Dropdown *"] floating enable
+    [title="Dropdown *"] move scratchpad
+    [title="Dropdown *"] sticky enable
+    [title="Dropdown *"] scratchpad show
+    [title="Dropdown *"] resize set width 625
+    [title="Dropdown *"] resize set height 400
+    [title="Dropdown *"] border pixel 3
+    [title="Dropdown *"] move position center	
+
+    # General dropdown window traits. The order can matter.
+    [title="Dropdown Launcher*"] floating enable
+    [title="Dropdown Launcher*"] move scratchpad
+    [title="Dropdown Launcher*"] sticky enable
+    [title="Dropdown Launcher*"] scratchpad show
+    [title="Dropdown Launcher*"] resize set width 225
+    [title="Dropdown Launcher*"] resize set height 100
+    [title="Dropdown Launcher*"] border pixel 0
+    [title="Dropdown Launcher*"] move position center	
+}
+
+exec noctalia
+# check, maybe not started
+exec --no-startup-id megasync 
+# exec --no-startup-id albert
+# exec_always ulauncher
+
+exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus_session_socket
+# exec /usr/bin/Xwayland
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
