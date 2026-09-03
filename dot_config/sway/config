@@ -246,13 +246,16 @@ set $big_right_side resize set 890 890, move position 980 135
 for_window [class=".*"] title_format "%title"
 for_window [class="size-sm"] resize set 400 500
 for_window [class="float"] $float
+for_window [title="^(Settings|Community themes).*" app_id="md.obsidian.Obsidian"] $float
 
 for_window [class="XnViewMP"] $float
 for_window [app_id="XnView"] $float
 # for_window [app_id="XnView"] $float
 for_window [app_id="zenity"] $float, border none
 for_window [app_id="dev.noctalia.Noctalia"] $float
-for_window [app_id="float"] $float
+for_window [app_id="net.davidotek.pupgui2"] $float
+for_window [app_id="org.satty.satty"] $float
+for_window [app_id="org.kde.partitionmanager"] $float
 
 for_window [app_id="vivaldi-stable" title="^Vivaldi Settings:*"] $float
 for_window [app_id="vivaldi-stable" title="Save File"] $float
