@@ -42,9 +42,6 @@ export MC_CONFIG_DIR="$XDG_CONFIG_HOME/mcli/"
 
 export BROWSER="vivaldi-stable"
 
-export QT_QPA_PLATFORMTHEME=qt6ct # for activate kvantum style&theme
-export QT_STYLE_OVERRIDE=kvantum # for activate kvantum style&theme
-
 # ============================================================ debug
 # export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 # export CLUTTER_BACKEND=wayland
@@ -53,7 +50,7 @@ export QT_STYLE_OVERRIDE=kvantum # for activate kvantum style&theme
 # export XDG_SESSION_TYPE=wayland
 # export SDL_VIDEODRIVER=wayland
 # export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-export RUSTBRIDGE_WORKSPACE="$WORKSPACE_DIR/projects/rustbridge/"
+# export RUSTBRIDGE_WORKSPACE="$WORKSPACE_DIR/projects/rustbridge/"
 # =============================================================
 
 [[ -f "$ZDOTDIR/.zshenv.local" ]] && source "$ZDOTDIR/.zshenv.local"

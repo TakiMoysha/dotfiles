@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# # Session
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=sway
+export XDG_CURRENT_DESKTOP=sway
+
+# # Wayland stuff
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export SDL_VIDEODRIVER=wayland
+
+export QT_QPA_PLATFORMTHEME=qt6ct # for activate kvantum style&theme
+export QT_STYLE_OVERRIDE=kvantum # for activate kvantum style&theme
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+export XCURSOR_THEM=GiGi-Murin
+export XCURSOR_SIZE=24
+
+# # exec sway --unsupported-gpu "$@"
+
+# [[ -f ~/.config/.zshrc ]] && . ~/.config/.zshrc

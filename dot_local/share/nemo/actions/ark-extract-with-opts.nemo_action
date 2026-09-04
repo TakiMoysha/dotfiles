@@ -1,0 +1,8 @@
+[Nemo Action]
+Active=true
+Name=Extract with Ark ...
+Comment=Extract archive using Ark
+Exec=ark --autodestination %F -d -b
+Icon-Name=ark
+Selection=S
+Extensions=zip;tar;gz;bz2;xz;rar;7z;xz;
