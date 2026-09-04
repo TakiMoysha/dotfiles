@@ -4,7 +4,6 @@ import = [
   # "~/.config/alacritty/colorschemes/Cobalt2.toml",
   # "~/.config/alacritty/colorschemes/Moonfly.toml",
   "~/.config/alacritty/colors.toml",
-  "~/.config/alacritty/themes/noctalia.toml",
 ]
 live_config_reload = true
 ipc_socket = true
