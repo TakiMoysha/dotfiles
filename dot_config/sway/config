@@ -226,7 +226,8 @@ gaps inner 0
 gaps outer 0
 smart_gaps on
 default_border pixel 4
-# hide_edge_borders --i3 smart
+default_floating_border none
+smart_borders on
 
 # Set the background image
 # output * bg /home/takimoysha/.config/sway/assets/wallpaper fill
@@ -259,6 +260,9 @@ for_window [app_id="dev.noctalia.Noctalia"] $float
 for_window [app_id="net.davidotek.pupgui2"] $float
 for_window [app_id="org.satty.satty"] $float
 for_window [app_id="org.kde.partitionmanager"] $float
+
+for_window [app_id="org.kde.ark"] $float
+for_window [app_id="nwg-look"] $float
 
 for_window [app_id="vivaldi-stable" title="^Vivaldi Settings:*"] $float
 for_window [app_id="vivaldi-stable" title="Save File"] $float
