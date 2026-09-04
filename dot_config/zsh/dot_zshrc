@@ -1,15 +1,16 @@
-# OS Specific
+# === OS Specific
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
 
 source /usr/share/cachyos-zsh-config/cachyos-config.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# set enable-bracketed-paste off
-
+# ===
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
@@ -22,15 +23,14 @@ export PATH="$ENCORE_INSTALL/bin:$HOME/.opencode/bin:$PATH"
 [ -s "$CARGO_HOME/env" ] && . "$CARGO_HOME/env"
 
 # tuning
-eval "$(~/.local/bin/mise activate zsh)" # environment manager
+eval "$(mise activate zsh)" # environment manager
 eval "$(zoxide init zsh)"
-eval "$(fnm env)" # fast node manager (insted of nvm)
 
 # ZSH_THEME="awesomepanda"
 # ZSH_THEME="cloud"
 ZSH_THEME="daveverwer"
 
-source $ZSH/oh-my-zsh.sh # should be after zsh env variables
+# source $ZSH/oh-my-zsh.sh # should be after zsh env variables
 
 # CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true" # to use hyphen-insensitive completion, [case-sensitivity must be off. _ and - will be interchangeable]
@@ -72,8 +72,9 @@ plugins=(
 )
 
 # autocompletions for k8s
-source <(kubectl completion zsh)
-source <(fzf --zsh)
+# if kubectl exists, then
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+[[ $commands[fzf] ]] && source <(fzf --zsh)
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -142,3 +143,4 @@ alias pdm=podman
 # if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
 #   tmux attach-session -t default || tmux new-session -s default
 # fi
+
