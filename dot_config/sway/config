@@ -235,22 +235,22 @@ input type:keyboard {
     xkb_numlock enable
 }
 
-
-
 title_align center
 
 # * [!] shadows enable - not working
 set $float border pixel 3, floating enable
 set $big_right_side resize set 890 890, move position 980 135 
 
-for_window [class=".*"] title_format "%title"
-for_window [class="size-sm"] resize set 400 500
-for_window [class="float"] $float
+# for_window [class=".*"] title_format "%title"
+# for_window [class="size-sm"] resize set 400 500
+
 for_window [title="^(Settings|Community themes).*" app_id="md.obsidian.Obsidian"] $float
+
+for_window [app_id="org.godotengine.ProjectManager"] $float
+for_window [title=".*DEBUG.*" app_id="org.godotengine.Editor"] $float
 
 for_window [class="XnViewMP"] $float
 for_window [app_id="XnView"] $float
-# for_window [app_id="XnView"] $float
 for_window [app_id="zenity"] $float, border none
 for_window [app_id="dev.noctalia.Noctalia"] $float
 for_window [app_id="net.davidotek.pupgui2"] $float
@@ -266,7 +266,6 @@ for_window [app_id="Rockstar Games Launcher"] $float
 for_window [app_id="nvchad"] $float, $big_right_side
 for_window [app_id="localsend"] $float
 for_window [app_id="org.gnome.gThumb"] $float
-for_window [class="Godot"] $float
 
 for_window {
     # [app_id="pot"] $float, resize set 600 800
