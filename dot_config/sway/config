@@ -117,12 +117,13 @@ bindsym $mod+Return     exec --no-startup-id $term
 
 # Noctalia IPC
 set $ipc noctalia msg
-bindsym $mod+d exec $ipc panel-toggle launcher
+bindcode $mod+40 exec $ipc panel-toggle launcher 
 bindsym $mod+semicolon exec $ipc settings-toggle
 
 bindsym Print           exec $ipc screenshot-region
 bindsym $mod+Print      exec $ipc screenshot-fullscreen
 
+bindsym $ALT+F1         exec --no-startup-id $ipc panel-open clipboard
 bindsym $ALT+F2         exec --no-startup-id nemo
 bindsym $ALT+F3         exec --no-startup-id $scripts/neovide
 
