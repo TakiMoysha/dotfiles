@@ -11,9 +11,9 @@ export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 
 # export GOPATH="$XDG_DATA_HOME/go"
 # export UV_INSTALL_DIR="$HOME/linux-home/system/pcl-89/"
-# export CARGO_HOME="$HOME/linux-home/system/pcl-89/.cargo"
-# export RUSTUP_HOME="$HOME/linux-home/system/pcl-89/.local/share/rustup"
-# export BUN_INSTALL="$HOME/linux-home/system/pcl-89/.local/share/bun"
+export CARGO_HOME="$HOME/.cargo"
+export RUSTUP_HOME="$HOME/linux-home/system/pcl-89/.local/share/rustup"
+export BUN_INSTALL="$HOME/linux-home/system/pcl-89/.local/share/bun"
 
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
@@ -31,6 +31,8 @@ export PATH="$CARGO_HOME/bin:$BUN_INSTALL/bin:$XDG_BIN_HOME:$ENCORE_INSTALL/bin:
 
 export EDITOR="/usr/bin/nvim"
 
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
 #
 # homelab/devlab & workspace
 #export HOMELAB_CONTAINERS_DIR="$STOREDIR/containers/homelab"
@@ -38,11 +40,12 @@ export STOREDIR="/mnt/wh-data/"
 export WORKSPACE_DIR="/mnt/wh-workspace/"
 
 # Minio
-export MC_CONFIG_DIR="$XDG_CONFIG_HOME/mcli/"
+# export MC_CONFIG_DIR="$XDG_CONFIG_HOME/mcli/"
 
 export BROWSER="vivaldi-stable"
 
 # ============================================================ debug
+export WINEPREFIX="$XDG_DATA_HOME"/wine
 # export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 # export CLUTTER_BACKEND=wayland
 # export XDG_CURRENT_DESKTOP=sway

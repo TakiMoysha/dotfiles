@@ -56,8 +56,10 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CU
 # font pango:DejaVu SansMono 8
 
 # hide cursor / 
-seat seat0 hide_cursor 3000
-# seat seat0 hide_cursor when-typing enable # issue: bug in 3d apps (pascube + mouse movement + D)
+seat * hide_cursor 3000
+seat * hide_cursor when-typing disable
+# allow windows capture mouse pointer (fix teleport issue in fullscreen 3d apps)
+seat * pointer_constraint enable
 
 bindsym $mod+h              focus left
 bindsym $mod+j              focus down
@@ -112,13 +114,13 @@ bindsym $mod+equal          scratchpad show
 floating_modifier $mod
 
 # bindsym $mod+Shift+q kill
-bindcode $mod+Shift+24 kill
+bindcode $mod+Shift+24  kill
 bindsym $mod+Return     exec --no-startup-id $term
 
 # Noctalia IPC
 set $ipc noctalia msg
-bindcode $mod+40 exec $ipc panel-toggle launcher 
-bindsym $mod+semicolon exec $ipc settings-toggle
+bindcode $mod+40        exec $ipc panel-toggle launcher 
+bindsym $mod+semicolon  exec $ipc settings-toggle
 
 bindsym Print           exec $ipc screenshot-region
 bindsym $mod+Print      exec $ipc screenshot-fullscreen
@@ -126,6 +128,7 @@ bindsym $mod+Print      exec $ipc screenshot-fullscreen
 bindsym $ALT+F1         exec --no-startup-id $ipc panel-open clipboard
 bindsym $ALT+F2         exec --no-startup-id nemo
 bindsym $ALT+F3         exec --no-startup-id $scripts/neovide
+bindsym $ALT+F4         exec --no-startup-id $ipc panel-toggle noctalia/notes:panel
 
 bindsym --locked XF86MonBrightnessUp exec $ipc brightness-up
 bindsym --locked XF86MonBrightnessDown exec $ipc brightness-down
@@ -250,6 +253,8 @@ set $big_right_side resize set 890 890, move position 980 135
 # for_window [class="size-sm"] resize set 400 500
 
 for_window [title="^(Settings|Community themes).*" app_id="md.obsidian.Obsidian"] $float
+
+for_window [app_id="DBeaver"] $float
 
 for_window [app_id="org.godotengine.ProjectManager"] $float
 for_window [title=".*DEBUG.*" app_id="org.godotengine.Editor"] $float

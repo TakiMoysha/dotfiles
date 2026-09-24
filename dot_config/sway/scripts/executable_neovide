@@ -1,10 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 DIR="$HOME/.config/sway"
 
 if [[ "$DEVLAB_CODING_DIR" ]]; then
-  neovide "$DEVLAB_CODING_DIR"
+	mise exec -- neovide "$DEVLAB_CODING_DIR"
 else
-  neovide
+	mise exec -- neovide
 fi
-
