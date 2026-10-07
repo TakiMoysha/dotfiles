@@ -248,6 +248,8 @@ title_align center
 # * [!] shadows enable - not working
 set $float border pixel 3, floating enable
 set $big_right_side resize set 890 890, move position 980 135 
+set $media_player resize set 800 500, move position 1100 500
+
 
 # for_window [class=".*"] title_format "%title"
 # for_window [class="size-sm"] resize set 400 500
@@ -255,6 +257,8 @@ set $big_right_side resize set 890 890, move position 980 135
 for_window [title="^(Settings|Community themes).*" app_id="md.obsidian.Obsidian"] $float
 
 for_window [app_id="DBeaver"] $float
+
+for_window [title="- Zeal" app_id="org.zealdocs.zeal"] $float, $big_right_side
 
 for_window [app_id="org.godotengine.ProjectManager"] $float
 for_window [title=".*DEBUG.*" app_id="org.godotengine.Editor"] $float
@@ -314,20 +318,23 @@ for_window {
 	[app_id="xfce4-settings-manager"] $float
 	[app_id="^xfce4-*"] $float
 
-	[app_id="(?i)mpv"] $float
     [app_id="peazip"] $float
     [app_id="xarchiver"] $float
 
-    [app_id="vesktop"] $float, move position 840 240, resize set 1080 740 px
+    [app_id="vesktop"] $float, move position 800 200, resize set 1080 740 px
     [app_id="telegram"] $float, move position 900 160, resize set 870 830 px
     [app_id="rquickshare"] $float, move position 900 160, resize set 870 830 px
 
     [app_id="com.github.hluk.copyq"] $float, resize set 800 400, move position 1040 80
 }
 
+
 for_window {
 	[app_id="vlc"] $float, resize set 800 500, move position 1100 500
 	[instance="vlc"] $float, resize set 800 500, move position 1100 500
+	[app_id="(?i)mpv"] $float, $media_player
+	[app_id="(?i)smplayer"] $float, $media_player
+
 }
 
 for_window {
