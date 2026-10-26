@@ -51,7 +51,14 @@ set $term alacritty
 # set $term kitty
 set $send-notify exec --no-startup-id notify-send -u low -h string:x-dunst-stack-tag:sway
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec systemctl --user import-environment \
+    DISPLAY \
+    WAYLAND_DISPLAY \
+    SWAYSOCK \
+    XDG_CURRENT_DESKTOP \
+    QT_QPA_PLATFORM \
+    QT_QPA_PLATFORMTHEME  \
+    QT_AUTO_SCREEN_SCALE_FACTOR
 
 # font pango:DejaVu SansMono 8
 
@@ -247,6 +254,7 @@ title_align center
 
 # * [!] shadows enable - not working
 set $float border pixel 3, floating enable
+set $float_loader border none, floating enable
 set $big_right_side resize set 890 890, move position 980 135 
 set $media_player resize set 800 500, move position 1100 500
 
@@ -260,8 +268,12 @@ for_window [app_id="DBeaver"] $float
 
 for_window [title="- Zeal" app_id="org.zealdocs.zeal"] $float, $big_right_side
 
-for_window [app_id="org.godotengine.ProjectManager"] $float
-for_window [title=".*DEBUG.*" app_id="org.godotengine.Editor"] $float
+for_window {
+    [app_id="org.godotengine.Editor" title="- Godot Engine"] floating disable
+    # [app_id="org.godotengine.Editor" title=".*DEBUG.*"] $float # TODO: bad regex, catch another titles
+    [app_id="org.godotengine.Editor" title="^Godot$"] $float_loader
+    [app_id="org.godotengine.ProjectManager"] $float
+}
 
 for_window [class="XnViewMP"] $float
 for_window [app_id="XnView"] $float
@@ -284,6 +296,14 @@ for_window [app_id="nvchad"] $float, $big_right_side
 for_window [app_id="localsend"] $float
 for_window [app_id="org.gnome.gThumb"] $float
 
+for_window [app_id="nz.co.mega.megasync"] $float
+
+for_window {
+    [app_id="hyprland-share-picker"] floating enable, move position center
+    [app_id="xdg-desktop-portal-kde"] floating enable, move position center
+    [app_id="xdg-desktop-portal-gtk"] floating enable, move position center
+    [app_id="xdg-desktop-portal-gnome"] floating enable, move position center
+}
 for_window {
     # [app_id="pot"] $float, resize set 600 800
     # [app_id="pot" title="Translate"] $float, resize set 400 600, move position 1500 10
@@ -327,7 +347,6 @@ for_window {
 
     [app_id="com.github.hluk.copyq"] $float, resize set 800 400, move position 1040 80
 }
-
 
 for_window {
 	[app_id="vlc"] $float, resize set 800 500, move position 1100 500
@@ -386,6 +405,7 @@ for_window {
     [title="Dropdown Launcher*"] border pixel 0
     [title="Dropdown Launcher*"] move position center	
 }
+
 
 exec noctalia
 # check, maybe not started

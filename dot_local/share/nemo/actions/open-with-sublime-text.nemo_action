@@ -1,0 +1,8 @@
+[Nemo Action]
+Active=true
+Name=Open with Sublime Text
+Comment=Open files in Sublime Text
+Exec=subl %F
+Icon-Name=sublime-text
+Selection=S
+Extensions=txt;md;mdx;html;css;js;json;py;sh;conf;log;meta;cfg;ini;yml;yaml;toml;none;
