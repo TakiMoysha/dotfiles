@@ -268,10 +268,16 @@ for_window [app_id="DBeaver"] $float
 
 for_window [title="- Zeal" app_id="org.zealdocs.zeal"] $float, $big_right_side
 
-for_window {
-    [app_id="org.godotengine.Editor" title="- Godot Engine"] floating disable
-    # [app_id="org.godotengine.Editor" title=".*DEBUG.*"] $float # TODO: bad regex, catch another titles
+
+# floating_con "Chr_BR_Dwarf_Casual_Female_01.prefab.tscn - worldgen-101 - Godot Engine" (xdg_shell, app_id: "org.godotengine.Editor")
+# floating_con "worldgen-101 (DEBUG)" (xdg_shell, app_id: "org.godotengine.Editor")
+# order is important
+for_window { 
+    [app_id="org.godotengine.Editor"] $float
+
     [app_id="org.godotengine.Editor" title="^Godot$"] $float_loader
+    [app_id="org.godotengine.Editor" title="Godot Engine$"] floating disable
+
     [app_id="org.godotengine.ProjectManager"] $float
 }
 
