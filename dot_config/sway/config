@@ -244,10 +244,9 @@ smart_borders on
 # output * bg /home/takimoysha/.config/sway/assets/wallpaper fill
 focus_wrapping no
 
-input type:keyboard {
+input "type:keyboard" {
     xkb_layout "us,ru"
     xkb_options "grp:alt_shift_toggle"
-    xkb_numlock enable
 }
 
 title_align center
@@ -267,7 +266,6 @@ for_window [title="^(Settings|Community themes).*" app_id="md.obsidian.Obsidian"
 for_window [app_id="DBeaver"] $float
 
 for_window [title="- Zeal" app_id="org.zealdocs.zeal"] $float, $big_right_side
-
 
 # floating_con "Chr_BR_Dwarf_Casual_Female_01.prefab.tscn - worldgen-101 - Godot Engine" (xdg_shell, app_id: "org.godotengine.Editor")
 # floating_con "worldgen-101 (DEBUG)" (xdg_shell, app_id: "org.godotengine.Editor")
@@ -311,6 +309,14 @@ for_window {
     [app_id="xdg-desktop-portal-gnome"] floating enable, move position center
 }
 for_window {
+    [app_id="(?i)nemo"] $float
+    [app_id="(?i)nemo" title="Open with"] $float
+}
+
+for_window [app_id="imhex" title="Open Files"] $float
+for_window [instance="ILSpy" title="Manage Assembly Lists"] $float
+
+for_window {
     # [app_id="pot"] $float, resize set 600 800
     # [app_id="pot" title="Translate"] $float, resize set 400 600, move position 1500 10
     [app_id="org.qbittorrent.qBittorrent"] $float
@@ -321,7 +327,6 @@ for_window {
     [app_id="qt6ct"] $float, sticky enable, border normal
     [app_id="xfce-polkit"] $float, sticky enable
     [app_id="blueman-manager"] $float
-    [app_id="(?i)nemo"] $float
     [app_id="(?i)thunar"] $float
     [app_id="thunar" title="^Copying.*|^Confirm.*|^File.*|^Create.*|^Select.*"] $float
     [app_id="pavucontrol"] $float
