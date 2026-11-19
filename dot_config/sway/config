@@ -431,3 +431,5 @@ exec --no-startup-id megasync
 exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus_session_socket
 # exec /usr/bin/Xwayland
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
+# only if login with env variables
+exec systemctl --user import-environment XDG_CONFIG_HOME XDG_DATA_HOME XDG_STATE_HOME XDG_CACHE_HOME XDG_BIN_HOME XDG_SESSION_TYPE XDG_SESSION_DESKTOP XDG_CURRENT_DESKTOP
