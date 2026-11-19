@@ -4,3 +4,6 @@ java = "latest"
 node = "latest"
 npm = "latest"
 pnpm = "latest"
+
+mr-boxington = "latest"
+rust = { version = "latest", mr_boxington = true, targets = [ "wasm32-unknown-unknown", "x86_64-unknown-linux-gnu", ] }
