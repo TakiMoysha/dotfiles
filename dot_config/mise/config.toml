@@ -1,0 +1,6 @@
+[tools]
+go = "latest"
+java = "latest"
+node = "latest"
+npm = "latest"
+pnpm = "latest"
