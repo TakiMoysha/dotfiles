@@ -254,6 +254,7 @@ title_align center
 # * [!] shadows enable - not working
 set $float border pixel 3, floating enable
 set $float_loader border none, floating enable
+set $wide_left_side resize set 800 600, move position 100 400
 set $big_right_side resize set 890 890, move position 980 135 
 set $media_player resize set 800 500, move position 1100 500
 
@@ -266,6 +267,7 @@ for_window [title="^(Settings|Community themes).*" app_id="md.obsidian.Obsidian"
 for_window [app_id="DBeaver"] $float
 
 for_window [title="- Zeal" app_id="org.zealdocs.zeal"] $float, $big_right_side
+for_window [app_id="io.github.arunsivaramanneo.GPUViewer"] $float, $wide_left_side
 
 # floating_con "Chr_BR_Dwarf_Casual_Female_01.prefab.tscn - worldgen-101 - Godot Engine" (xdg_shell, app_id: "org.godotengine.Editor")
 # floating_con "worldgen-101 (DEBUG)" (xdg_shell, app_id: "org.godotengine.Editor")
@@ -280,6 +282,8 @@ for_window {
 }
 
 for_window [class="XnViewMP"] $float
+for_window [app_id="FontBase"] $float
+for_window [app_id="disktree"] $float
 for_window [app_id="XnView"] $float
 for_window [app_id="zenity"] $float, border none
 for_window [app_id="dev.noctalia.Noctalia"] $float
